@@ -444,8 +444,8 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-
   function initGitalk () {
     var gitalk = new Gitalk(Object.assign({
       clientID: '3fc38e8bc4d53810b02b',
-      clientSecret: '7140ed82f15f1f64fb59db386cf2ed3e00ca0d6b',
-      repo: 'Rlan-h.github.io',
+      clientSecret: '4034ee6947a4da0b944dae0cafc83ca84d186d3e',
+      repo: 'blog_comments',
       owner: 'Rlan-h',
       admin: ['Rlan-h'],
       id: 'd6ebe1721806c44cfc0a93cb179f8af0',
@@ -515,7 +515,7 @@ if ('Gitalk' === 'Gitalk' || !true) {
   }
 
   const getComment = () => {
-    fetch('https://api.github.com/repos/Rlan-h/Rlan-h.github.io/issues/comments?sort=updated&direction=desc&per_page=6&page=1',{
+    fetch('https://api.github.com/repos/Rlan-h/blog_comments/issues/comments?sort=updated&direction=desc&per_page=6&page=1',{
       "headers": {
         Accept: 'application/vnd.github.v3.html+json'
       }
