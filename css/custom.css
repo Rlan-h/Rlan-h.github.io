@@ -1,0 +1,107 @@
+/*10s为加载动画的时间，1为加载动画的次数，ease-in-out为动画效果*/
+/* 
+  #page-header: 页面头部图片
+  #web_bg: 网页背景图片
+  .medium-zoom-image: 文章中的图片(不包括封面)
+*/
+#page-header,
+#web_bg,
+.medium-zoom-image {
+    -webkit-animation: imgblur 10s 1 ease-in-out;
+    animation: imgblur 3s 1 ease-in-out;
+}
+@keyframes imgblur {
+  0% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+/*适配使用-webkit内核的浏览器 */
+@-webkit-keyframes imgblur {
+  0% {
+    -webkit-filter: blur(5px);
+  }
+  100% {
+    -webkit-filter: blur(0px);
+  }
+}
+
+/* 隐藏 Aplayer 的全局吸底音乐标签，在css中添加 */
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  left: -66px !important
+}
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+  left: 0 !important
+}
+
+/*GitHub开源圆角*/
+#card-info-btn {
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+/* 右侧小按钮圆角 */
+#rightside>div>button,#to_comment {
+  margin-right: 4px;
+  border-radius: 50%;
+}
+
+/*侧边滑动颜色*/
+:root {
+  --btn-bg: #3a87b9;
+}
+
+/* 目录颜色圆角调整 */
+#aside-content #card-toc .toc-content .toc-link.active {
+  background: #669cbe;
+  border-radius: 5px;
+}
+
+body {
+  font-size: 18px;
+}
+
+/* 文章目录 */
+#aside-content #card-toc .toc-content {
+  margin: 10px -18px;
+}
+ #aside-content #card-toc .toc-content .toc-link.active {
+  line-height: 1.2;
+  border-radius: 12px;
+  border-left-color: var(--heo-hovertext);
+  background-color: var(--heo-card-bg);
+  color: var(--heo-lighttext);
+  font-weight: bold;
+  font-size: 20px;
+}
+[data-theme=dark].toc .toc-item.active .toc-link .toc-text {
+  color: var(--heo-white);
+}
+#aside-content #card-toc .toc-content .toc-item.active .toc-link {
+  opacity: 1;
+  border-radius: 8px;
+}
+#aside-content #card-toc .toc-content .toc-link {
+  line-height: 1.2;
+  padding: 8px;
+  border-left: 0px solid transparent;
+  border-radius: 12px;
+  color: var(--heo-secondtext);
+  cursor: default;
+}
+#aside-content #card-toc .toc-content .toc-link:not(.active) span {
+  opacity: 0.6;
+  cursor: pointer;
+  filter: blur(1px);
+  transition: 0.3s;
+}
+#aside-content #card-toc:hover .toc-content .toc-link:not(.active) span {
+  filter: blur(0px);
+  opacity: 1;
+}
+#aside-content #card-toc .toc-content .toc-link:not(.active) span:hover {
+  color: var(--heo-lighttext);
+}
