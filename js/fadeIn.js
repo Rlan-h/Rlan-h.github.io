@@ -6,7 +6,7 @@ for(var i = 0;i<arr.length;i++){
     // 必填项 打上动画类名
     arr[i].classList.add("animate__zoomIn"),
     // 动画执行时间
-    arr[i].setAttribute("data-wow-duration", "1.5s"),
+    arr[i].setAttribute("data-wow-duration", "1s"),
     // 动画延迟多久后执行
     arr[i].setAttribute("data-wow-delay", "0"),
     // 动画执行次数
@@ -17,7 +17,7 @@ var arr2 = document.getElementsByClassName("card-widget");
 for(var i = 0;i<arr2.length;i++){
     arr2[i].classList.add("wow");
     arr2[i].classList.add("animate__zoomIn");
-    arr2[i].setAttribute("data-wow-duration", "1.5s"),
+    arr2[i].setAttribute("data-wow-duration", "1s"),
     arr2[i].setAttribute("data-wow-delay", "0"),
     arr2[i].setAttribute("data-wow-iteration", "1")
   }
