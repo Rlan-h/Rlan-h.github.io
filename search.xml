@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title>从0开始使用 Hexo+butterfly_Github page 搭建个人博客网站</title>
+      <link href="/article/b9313b7126a9.html"/>
+      <url>/article/b9313b7126a9.html</url>
+      
+        <content type="html"><![CDATA[<!-- # Hexo+butterfly_Github page 搭建个人博客网站 --><blockquote><p>敬请期待<br>本教程使用 Hexo框架+butterfly主题+Github page部署 进行网站搭建</p></blockquote><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><p>1、访问<a href="github.com">Github</a>进行账号注册<br>2、注册之后创建一个仓库</p><h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p><strong>安装前提：</strong></p><ul><li><a href="https://nodejs.org/en">Node.js</a>(Node.js版本需不低于10.13，建议使用Node.js12.0及以上版本)<br>下载较慢可以访问<a href="https://nodejs.cn/">Node.js中文网</a></li><li><a href="https://git-scm.com/">Git</a></li></ul><p><strong>安装Git</strong></p><ul><li>Windows: 下载并安装<a href="https://git-scm.com/download/win">git</a></li><li>Mac: 使用 <a href="https://mxcl.github.com/homebrew/">Homebrew</a>，<a href="https://www.macports.org/">MacPorts</a></li><li>Linux(Ubuntu，Debian): <code>sudo apt-get install git-core</code></li><li>Linux(Fedora，Red Hat，CentOS): <code>sudo yum install git-core</code></li></ul><blockquote><p><strong>Mac用户</strong><br>如果在编译时可能会遇到问题，请先到 App Store 安装 Xcode，完成后启动并进入 <strong>Preferences-&gt;Download-&gt;Command Line Tools-&gt;install</strong> 安装命令行工具</p></blockquote><blockquote><p><strong>Windows用户</strong><br>对于中国大陆地区的用户，可以前往<a href="https://registry.npmmirror.com/binary.html?path=git-for-windows/">淘宝 Git for Windows 镜像</a> 下载 git 安装包</p></blockquote><p><strong>安装Node.js</strong><br>Node.js 为大多数平台提供了官方的安装程序，对于中国大陆地区的用户，可以前往<a href="https://registry.npmmirror.com/binary.html?path=node/">淘宝 Node.js 镜像</a> 下载</p><p>其他安装方法：</p><ul><li>Windows: 通过 <a href="https://github.com/jasongin/nvs/">nvs</a>或者 <a href="https://github.com/nvm-sh/nvm">nvm</a> 安装</li><li>Mac: 使用 <a href="https://mxcl.github.com/homebrew/">Homebrew</a>，<a href="https://www.macports.org/">MacPorts</a></li><li>Linux:(DEB&#x2F;RPM-based): 从 <a href="https://github.com/nodesource/distributions">NodeSource</a> 安装</li><li>其他: 使用响应的软件包管理器进行安装，可以参考由 Node.js 提供的 <a href="https://nodejs.org/zh-cn/download/package-manager">指导</a></li></ul><p>对于Mac和Linux同样建议使用 nvs 和 nvm，以避免可能会出现的权限问题</p><p><strong>安装Hexo</strong><br>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h2 id="初始化博客项目"><a href="#初始化博客项目" class="headerlink" title="初始化博客项目"></a>初始化博客项目</h2><p>新建一个文件夹，在该文件夹根目录打开cmd，使用 hexo-cli 初始化博客项目</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure><p>继续安装 <a href="https://github.com/jerryc127/hexo-theme-butterfly">butterfly</a> 主题</p><div class="tabs" id="butterfly-install"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#butterfly-install-1">npm安装</button></li><li class="tab"><button type="button" data-href="#butterfly-install-2">Git安装</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="butterfly-install-1"><blockquote><p>此方法只支持 Hexo 5.0.0 以上版本<br><strong>通过npm安装并不会在themes文件夹下生成主题文件夹，而是在node_modules下生成</strong></p></blockquote><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-butterfly --save</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="butterfly-install-2"><blockquote><p>此方法只支持 Hexo 5.0.0 以上版本<br><strong>通过npm安装并不会在themes文件夹下生成主题文件夹，而是在node_modules下生成</strong></p></blockquote><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-butterfly --save</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>butterfly主题美化合集</title>
+      <link href="/article/8d109f6dac71.html"/>
+      <url>/article/8d109f6dac71.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="butterfly主题美化合集"><a href="#butterfly主题美化合集" class="headerlink" title="butterfly主题美化合集"></a>butterfly主题美化合集</h1><p>参考文章：<a href="https://blog.imzjw.cn/posts/b74f504f/index.html">小嘉的部落格</a></p><blockquote><p>敬请期待</p></blockquote>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于主页动画处理</title>
       <link href="/article/a83dbdc129da.html"/>
       <url>/article/a83dbdc129da.html</url>

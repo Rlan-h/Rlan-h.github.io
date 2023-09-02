@@ -55,10 +55,10 @@
 }
 
 /* 目录颜色圆角调整 */
-#aside-content #card-toc .toc-content .toc-link.active {
+/* #aside-content #card-toc .toc-content .toc-link.active {
   background: #669cbe;
   border-radius: 5px;
-}
+} */
 
 body {
   font-size: 20px;
@@ -68,7 +68,7 @@ body {
 #aside-content #card-toc .toc-content {
   margin: 10px -18px;
 }
- #aside-content #card-toc .toc-content .toc-link.active {
+#aside-content #card-toc .toc-content .toc-link.active {
   line-height: 1.2;
   border-radius: 12px;
   border-left-color: var(--heo-hovertext);
@@ -111,7 +111,7 @@ body {
   width: 100%;
   position: absolute;
   left: 0;
-  bottom: -11px;
+  bottom: -14px;
   z-index: 5;
 }
 .waves-area .waves-svg {
@@ -248,4 +248,71 @@ body {
 }
 :root{
   --lyx-theme:#ed709b /*我的主题色*/
+}
+
+/* 主页文章卡片 */
+#recent-posts > .recent-post-item {
+  height: 15em;
+  border-radius: 1.2rem;
+}
+
+/* 网站背景颜色渐变 */
+.page,
+.post {
+  background: linear-gradient(45deg, #f6d8f5, #c2f1f0, #f0debf) 
+}
+
+/*版权卡片美化*/
+#post .post-copyright {
+  position: relative;
+  margin: 2rem 0 0.5rem;
+  padding: 1.5rem 0.8rem;
+  border: 8px solid #f6f6f6; /*卡片边框*/
+  border-radius: 20px; /*边框圆角*/
+  background: linear-gradient(45deg, #f6d8f5, #c2f1f0, #f0debf) 
+}
+#post .post-copyright:before {
+  position: absolute;
+  top: -1.9rem; /*C位置*/
+  color: #49b1f540; /*C颜色*/
+  font-size: 6rem; /*C大小*/
+}
+
+/* 全局背景透明渐变 */
+#recent-posts>.recent-post-item,.layout_page>div:first-child:not(.recent-posts),.layout_post>#page,.layout_post>#post,.read-mode .layout_post>#post {
+  background: var(--light_bg_color)
+}
+
+#aside-content .card-widget {
+  background: var(--light_bg_color)
+}
+
+#web_bg {
+  background: linear-gradient(90deg,rgba(247,149,51,.1),rgba(243,112,85,.1) 15%,rgba(239,78,123,.1) 30%,rgba(161,102,171,.1) 44%,rgba(80,115,184,.1) 58%,rgba(16,152,173,.1) 72%,rgba(7,179,155,.1) 86%,rgba(109,186,130,.1))
+}
+
+/* 那年今日 */
+.histoty_slide {
+  background: var(--light_bg_color) !important;
+}
+
+/* 页脚透明渐变 */
+#footer {
+  background: rgba(255,255,255,.15);
+  color: #000;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  backdrop-filter: saturate(100%) blur(5px)
+}
+
+#footer::before {
+  background: rgba(255,255,255,.15)
+}
+
+#footer #footer-wrap {
+  color: var(--font-color)
+}
+
+#footer #footer-wrap a {
+  color: var(--font-color)
 }
