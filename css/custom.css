@@ -54,12 +54,6 @@
   --btn-bg: #3a87b9;
 }
 
-/* 目录颜色圆角调整 */
-/* #aside-content #card-toc .toc-content .toc-link.active {
-  background: #669cbe;
-  border-radius: 5px;
-} */
-
 body {
   font-size: 16px;
 }
@@ -252,7 +246,7 @@ body {
 
 /* 主页文章卡片 */
 #recent-posts > .recent-post-item {
-  height: 15em;
+  height: 15.8em;
   border-radius: 1.2rem;
 }
 
@@ -284,7 +278,8 @@ body {
 }
 
 #aside-content .card-widget {
-  background: var(--light_bg_color)
+  background: var(--light_bg_color);
+  border-radius: 1.2em;
 }
 
 #web_bg {
@@ -315,4 +310,9 @@ body {
 
 #footer #footer-wrap a {
   color: var(--font-color)
+}
+
+/* 侧边栏最新文章封面 */
+#aside-content .aside-list > .aside-list-item .thumbnail {
+  border-radius: 1em;
 }
