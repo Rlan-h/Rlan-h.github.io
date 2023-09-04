@@ -316,3 +316,8 @@ body {
 #aside-content .aside-list > .aside-list-item .thumbnail {
   border-radius: 1em;
 }
+
+/* 归档页文章封面 */
+.article-sort-item-img {
+  border-radius: 1em;
+}
