@@ -361,7 +361,7 @@ body {
 /* 网站背景颜色渐变 */
 /* .page,
 .post {
-  background: linear-gradient(45deg, #f6d8f5, #c2f1f0, #f0debf) 
+  background: linear-gradient(45deg, #f6d8f5, #c2f1f0, #f0debf); 
 } */
 html, body {
   background: linear-gradient(45deg, #f6d8f5, #c2f1f0, #f0debf) !important; 
