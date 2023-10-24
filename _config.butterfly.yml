@@ -21,7 +21,7 @@ menu:
     网站: /website/ || fas fa-globe
   心愿单: /wish/ || fas fa-star
   友链: /link/ || fas fa-link
-  关于: /about/ || fas fa-heart
+  关于: /about/ || fas fa-id-card
 
 # Code Blocks (代码相关)
 # --------------------------------------
