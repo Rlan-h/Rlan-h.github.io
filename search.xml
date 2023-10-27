@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>关于tsconfig.json</title>
+      <link href="/article/61d3bed21666.html"/>
+      <url>/article/61d3bed21666.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>如果一个目录下存在一个tsconfig.json文件，那么它意味着这个目录是TypeScript项目的根目录。 tsconfig.json文件中指定了用来编译这个项目的根文件和编译选项。</p><h2 id="tsconfig-json各配置属性详解"><a href="#tsconfig-json各配置属性详解" class="headerlink" title="tsconfig.json各配置属性详解"></a>tsconfig.json各配置属性详解</h2>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于JavaScript中console的内置方法</title>
       <link href="/article/3280af0d0656.html"/>
       <url>/article/3280af0d0656.html</url>
