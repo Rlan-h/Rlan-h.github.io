@@ -203,8 +203,8 @@ post_pagination: 2
 
 # Displays outdated notice for a post (文章过期提醒)
 noticeOutdate:
-  enable: false
-  style: flat # style: simple/flat
+  enable: true
+  style: simple # style: simple/flat
   limit_day: 500 # When will it be shown
   position: top # position: top/bottom
   message_prev: It has been
@@ -305,7 +305,7 @@ newest_comments:
 
 # Conversion between Traditional and Simplified Chinese (简繁转换)
 translate:
-  enable: true
+  enable: false
   # The text of a button
   default: 繁
   # the language of website (1 - Traditional Chinese/ 2 - Simplified Chinese）
@@ -322,7 +322,7 @@ readmode: true
 
 # dark mode
 darkmode:
-  enable: true
+  enable: false
   # Toggle Button to switch dark/light mode
   button: false
   # Switch dark/light mode automatically (自动切換 dark mode和 light mode)
@@ -335,14 +335,14 @@ darkmode:
   end: # 22
 
 # show scroll percent in scroll-to-top button
-rightside_scroll_percent: false
+rightside_scroll_percent: true
 
 # Don't modify the following settings unless you know how they work (非必要請不要修改 )
 # Choose: readmode,translate,darkmode,hideAside,toc,chat,comment
 # Don't repeat 不要重复
 rightside_item_order:
-  enable: false
-  hide: # readmode,translate,darkmode,hideAside
+  enable: true
+  hide: readmode,translate,darkmode,hideAside
   show: # toc,chat,comment
 
 # Math (数学)
