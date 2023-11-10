@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Nest.js请求的生命周期</title>
+      <link href="/article/b57a043de6ee.html"/>
+      <url>/article/b57a043de6ee.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="请求生命周期"><a href="#请求生命周期" class="headerlink" title="请求生命周期"></a>请求生命周期</h2><p>Nest 应用程序处理请求并按照我们所说的 <strong>请求生命周期</strong> 的顺序产生响应。使用中间件、管道、守卫和拦截器，在请求生命周期种追踪特定代码的执行位置可能会很困难，特别是当全局、控制器级和路由级组件开始发挥作用时。通常，一个请求通过中间件流到守卫，然后到拦截器，然后到管道，最后返回到返回路径上的拦截器（在生成响应时）。</p><h3 id="Middleware-中间件"><a href="#Middleware-中间件" class="headerlink" title="Middleware(中间件)"></a>Middleware(中间件)</h3><p>中间件按特定顺序执行。首先，Nest 运行全局绑定的中间件（例如绑定的中间件），然后运行模块绑定的中间件，这些中间件是在路径上确定的 app.use 。中间件按照绑定的顺序按顺序运行，类似于 Express 中的中间件工作方式。对于跨不同模块绑定的中间件，绑定到根模块的中间件将首先运行，然后中间件将按照模块添加到 imports 数组的顺序运行。</p><h3 id="Guards-守卫"><a href="#Guards-守卫" class="headerlink" title="Guards(守卫)"></a>Guards(守卫)</h3><p>防护执行从全局防护开始，然后到控制器防护，最后到路由防护。与中间件一样，守卫按绑定顺序运行。例如：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@UseGuards</span>(<span class="title class_">Guard1</span>, <span class="title class_">Guard2</span>)</span><br><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;cats&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CatsController</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"><span class="keyword">private</span> catsService: CatsService</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@UseGuards</span>(<span class="title class_">Guard3</span>)</span><br><span class="line">  <span class="meta">@Get</span>()</span><br><span class="line">  <span class="title function_">getCats</span>(): <span class="title class_">Cats</span>[] &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">catsService</span>.<span class="title function_">getCats</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>Guard1 将在之前 Guard2 执行，并且两者都将在 Guard3 之前执行。</p><div class="note no-icon flat"><p>当谈到全局绑定与控制器或本地绑定时，区别在于保护（或其他组件）的绑定位置。</p></div><div class="note no-icon flat"><p>如果通过模块使用 app.useGlobalGuard() 或提供组件，则该组件是全局绑定的。否则，如果装饰器位于控制器类之前，则它绑定到控制器，如果装饰器继续进行路由声明，则绑定到路由。</p></div><h3 id="Interceptors-拦截器"><a href="#Interceptors-拦截器" class="headerlink" title="Interceptors(拦截器)"></a>Interceptors(拦截器)</h3><p>在大多数情况下，拦截器遵循与守卫相同的模式，但有一个问题：当拦截器返回 RxJS Observables 时，可观察对象将以先进后出的方式解析。因此，入站请求将经过标准的全局、控制器、路由级解析，但请求的响应端（即从控制器方法处理程序返回后）将从路由到控制器再到全局进行解析。此外，管道、控制器或服务引发的任何错误都可以在拦截器的 catchError 运算符中读取。</p><h3 id="Pipes-管道"><a href="#Pipes-管道" class="headerlink" title="Pipes(管道)"></a>Pipes(管道)</h3><p>管道遵循标准的全局到控制器来路由绑定序列，在 @usePipes() 参数方面具有相同的先进先出顺序。但是，在路由参数级别，如果有多个管道在运行，则它们将按照最后一个参数的顺序运行，管道将运行到第一个参数。这也适用于路由级别和控制器级别管道。例如，如果我们有以下控制器：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@UsePipes</span>(<span class="title class_">GeneralValidationPipe</span>)</span><br><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;cats&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CatsController</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"><span class="keyword">private</span> catsService: CatsService</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@UsePipes</span>(<span class="title class_">RouteSpecificPipe</span>)</span><br><span class="line">  <span class="meta">@Patch</span>(<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">  <span class="title function_">updateCat</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="meta">@Body</span>() body: UpdateCatDTO,</span></span><br><span class="line"><span class="params">    <span class="meta">@Param</span>() params: UpdateCatParams,</span></span><br><span class="line"><span class="params">    <span class="meta">@Query</span>() query: UpdateCatQuery,</span></span><br><span class="line"><span class="params">  </span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">catsService</span>.<span class="title function_">updateCat</span>(body, params, query);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>然后 将 GeneralValidationPipe 运行 ，然后是 ，然后是 body 对象，然后移动到 RouteSpecificPipe query params ，遵循相同的顺序。如果有任何特定于参数的管道，它们将在控制器和路由级别管道之后运行（同样，从最后一个参数到第一个参数）。</p><h3 id="Filters-过滤器"><a href="#Filters-过滤器" class="headerlink" title="Filters(过滤器)"></a>Filters(过滤器)</h3><p>筛选器是唯一不首先解析全局的组件。相反，过滤器从尽可能低的级别解析，这意味着执行从任何路由绑定过滤器开始，然后继续到控制器级别，最后到全局过滤器。请注意，异常不能从一个过滤器传递到另一个过滤器;如果路由级筛选器捕获异常，则控制器或全局级筛选器无法捕获相同的异常。实现此类效果的唯一方法是在筛选器之间使用继承。</p><div class="note no-icon flat"><p>仅当在请求过程中发生任何未捕获的异常时，才会执行筛选器。</p></div><div class="note no-icon flat"><p>捕获的异常（例如使用 捕获的 try&#x2F;catch 异常）不会触发异常筛选器触发。一旦遇到未捕获的异常，生命周期的其余部分将被忽略，请求将直接跳到筛选器。</p></div><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通常，请求的生命周期看起来如下所示:</p><p>1.传入请求<br>2.在全局范围内绑定的中间件<br>3.模块绑定中间件<br>4.全局警卫<br>5.控制器警卫<br>6.警卫路由<br>7.全局拦截器(零部件)<br>8.控制器拦截器(零部件)<br>9.路由拦截器(零部件)<br>10.全局管道<br>11.控制器的管道<br>12.路由管道<br>13.路由参数管道<br>14.控制器(方法处理程序)<br>15.服务(如果存在)<br>16.路由拦截器(post 请求)<br>17.控制器拦截器(post 请求)<br>18.全局拦截器(post 请求)<br>19.异常过滤器(路由，然后是控制器，然后是全局)<br>20.服务器响应</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nest.js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生命周期 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于tsconfig.json</title>
       <link href="/article/61d3bed21666.html"/>
       <url>/article/61d3bed21666.html</url>
@@ -15,6 +40,8 @@
         <tags>
             
             <tag> Ts </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -30,6 +57,18 @@
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="打印调试信息"><a href="#打印调试信息" class="headerlink" title="打印调试信息"></a>打印调试信息</h2><p><strong>console.debug()</strong></p><div class="gallery">    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">    <span class="gallery-data">[{"url":"https://im.gurl.eu.org/file/50117c7a5ac73a8d8ce94.png","alt":""},{"url":"https://im.gurl.eu.org/file/89063d7e524f14fe5586d.png","alt":""}]</span>    </div>    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>    </div><p>浏览器日志级别：</p><ul><li>详细(Verbose)</li><li>信息(Info)</li><li>警告(Warnings)</li><li>错误(Errors)<br>通常浏览器控制台日志级别默认为默认级别(未勾选详细信息)，把浏览器日志级别勾选上详细(Verbose)，即可在控制台看见调试信息</li></ul><h2 id="打印消息"><a href="#打印消息" class="headerlink" title="打印消息"></a>打印消息</h2><h3 id="普通消息"><a href="#普通消息" class="headerlink" title="普通消息"></a>普通消息</h3><p><strong>console.log()</strong></p><div class="gallery">    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">    <span class="gallery-data">[{"url":"https://im.gurl.eu.org/file/2a6a64e856ed609078a59.png","alt":""}]</span>    </div>    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>    </div><p><strong>console.info()</strong></p><div class="gallery">    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">    <span class="gallery-data">[{"url":"https://im.gurl.eu.org/file/bb9a79aae65efbacf9062.png","alt":"看不见info信息"},{"url":"https://im.gurl.eu.org/file/dd1aba62dc43a04f41ff2.png","alt":"日志级别勾选信息之后可以可见"}]</span>    </div>    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>    </div><p>不同浏览器的info样式不一样，可自行尝试</p><p><strong>console.table()</strong></p>]]></content>
       
       
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+        </tags>
       
     </entry>
     
@@ -88,6 +127,20 @@
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="butterfly主题美化合集"><a href="#butterfly主题美化合集" class="headerlink" title="butterfly主题美化合集"></a>butterfly主题美化合集</h1><p>参考文章：<a href="https://blog.imzjw.cn/posts/b74f504f/index.html">小嘉的部落格</a></p><blockquote><p>敬请期待</p></blockquote>]]></content>
       
       
+      <categories>
+          
+          <category> 博客主题美化 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> butterfly </tag>
+            
+        </tags>
       
     </entry>
     
